@@ -1,3 +1,21 @@
+# Student Management Org (for practice)
+Objects List
+-Contacts (Student List)
+-Class__c
+-Awards__c
+-Certifications__c
+-Grade__c
+-Opportunity (lunch box demand)
+-ChangeStudentInfo__c
+-ClassByLevel__c
+
+Custom Component
+-SearchStudent (custom tab)
+
+Visualforce Page
+-PrintStudentList (save attendance list as PDF on note&attatchment)
+
+
 # Salesforce DX Project: Next Steps
 
 Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
