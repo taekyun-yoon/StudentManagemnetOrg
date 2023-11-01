@@ -1,0 +1,45 @@
+<!--
+ - Created by DAEU on 2023-09-12.
+ -->
+
+<!--************************************************************************************
+ * Description : 실습) 수상경력에 학생정보를 불러오는 컴포넌트 예제
+ *
+ * Ver      Date           Author          Modification
+ * ===================================================================================
+   1.0      2022-09-07     yr.lee          Create
+*************************************************************************************-->
+
+<aura:component description="StudentInfo" controller="StudentInfoController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+    <!-- 변수 선언 -->
+    <aura:attribute name="objStudent" type="Object" default=""/> <!--component 에 있는 거 가져다 쓸 때 v.attribute-->
+    <aura:attribute name="recordId" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}" /> <!--c.function 은 controller에 있는 함수 사용할때-->
+
+    <h3 class="slds-section__title slds-theme_shade" style="margin-top:10px">
+        <span class="slds-truncate slds-p-horizontal_small" title="수신동의">수상자(학생) 정보</span>
+    </h3>
+
+    <lightning:layout>
+        <lightning:layoutItem size="6" padding="horizontal-small">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly">
+                <div class="slds-form-element slds-form-element_horizontal">
+                    <span class="slds-form-element__label">이름</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">{!v.objStudent.LastName}</div>
+                    </div>
+                </div>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="6" padding="horizontal-small">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly">
+                <div class="slds-form-element slds-form-element_horizontal">
+                    <span class="slds-form-element__label">학년 반</span>
+                    <div class="slds-form-element__control">
+                        <div class="slds-form-element__static">{!v.objStudent.ClassName}</div>
+                    </div>
+                </div>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

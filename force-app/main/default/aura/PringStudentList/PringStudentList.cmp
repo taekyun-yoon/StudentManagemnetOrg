@@ -1,0 +1,50 @@
+<aura:component description="PrintStudentList"
+                implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes" >
+
+    <aura:attribute name="vfPageUrl" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}"/>
+
+
+    <aura:html tag="style">
+        .slds-modal__container{
+        min-width: 30% !important;
+        max-width: fit-content !important;
+        padding: 0 20px;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content {
+        overflow-y: hidden !important;
+        height: unset !important;
+        max-height: unset !important;
+        }
+        .iframe-padding-left-right {
+        <!--padding-right: 200px;
+        padding-left : 200px;-->
+        }
+    </aura:html>
+
+    <div class="slds-col modal-header slds-modal__header">
+        출석부 PDF
+    </div>
+    <!-- (Style) divContent : 전체 Modal 크기 조절 -->
+    <div class="slds-col modal-body divContent scrollable" style="position:relative;min-height:80vh;width:100%">
+        <aura:if isTrue="{!v.showSpinner}">
+            <lightning:spinner aura:id="spinner" alternativeText="Loading" size="small" variant="brand"/>
+        </aura:if>
+        <lightning:layout class="slds-p-top-small slds-align_absolute-center slds-size_1-of-1" multipleRows="true" > <!--slds-align_absolute-center-->
+            <lightning:layoutItem size="12" class="iframe-padding-left-right">
+                <iframe aura:id="vfFrameMaster" class="iFrameStyle" src="{!v.vfPageUrl}" style="width:870px;height:78vh;"/>
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+
+    <div class="slds-col modal-footer slds-modal__footer">
+        <lightning:button variant="brand" label="Save" onclick="{!c.fnSave}"/>
+        <lightning:button variant="neutral" label="Cancel" onclick="{!c.fnCancel}"/>
+    </div>
+</aura:component>

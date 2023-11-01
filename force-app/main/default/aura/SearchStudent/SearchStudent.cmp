@@ -1,0 +1,71 @@
+<!--
+ - Created by DAEU on 2023-09-17.
+ -->
+
+<aura:component description="SearchStudent" controller="SearchStudentController" implements="force:appHostable" >
+
+        <aura:attribute name="accountList" type="List"/>
+        <aura:attribute name="tableData" type="List"/>
+        <aura:attribute name="columns" type="List"/>
+        <aura:attribute name="searchResult" type="Object" default=""/>
+        <aura:attribute name="searchGrade" type="String" default=""/>
+        <aura:attribute name="searchClass" type="String" default=""/>
+        <aura:attribute name="searchName" type="String" default=""/>
+
+        <aura:attribute name="RowsCount" type="String" default=""/>
+        <aura:attribute name="pageSize" type="Integer" default="20" />
+        <aura:attribute name="currentPageNumber" type="Integer" default="1" />
+        <aura:attribute name="totalPages" type="Integer" default="1" />
+
+        <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+        <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-4">
+                        <lightning:input type="number" name="studentGrade" value="{!v.searchGrade}" label="학년" placeholder="학년을 입력하시오.." />
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                        <lightning:input type="number" name="studentClass" value="{!v.searchClass}" label="반" placeholder="반을 입력하시오.." />
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                        <lightning:input type="text" name="studentName" value="{!v.searchName}" label="이름" placeholder="이름을 입력하시오.." />
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                        <lightning:button iconName="utility:search" iconPosition="left" label="조회" onclick="{!c.clickSearch}"/>
+                </div>
+        </div>
+
+        <div class="studentTable" style="margin-top: 15px">
+                <h1>총 {! v.RowsCount }건</h1>
+                <div style="{! 'height:' + (25 * 25) + 'px;' }">
+                <lightning:datatable
+                    keyField="id"
+                    data="{! v.tableData }"
+                    columns="{! v.columns }"
+                    hideCheckboxColumn="true"
+                    showRowNumberColumn="false"/>
+                </div>
+        </div>
+        <div class="slds-align_absolute-center" style="margin-top: 30px">
+        <lightning:button
+                label="First"
+                onclick="{! c.onFirst }"
+                disabled="{! v.currentPageNumber == 1 }" />
+        <lightning:button
+                label="Preview"
+                onclick="{! c.onPrev }"
+                disabled="{! v.currentPageNumber == 1 }" />
+
+        <span>
+            {! (v.currentPageNumber) } / {! (v.totalPages) }
+        </span>
+
+        <lightning:button
+                label="Next"
+                onclick="{! c.onNext }"
+                disabled="{! v.currentPageNumber == v.totalPages }" />
+        <lightning:button
+                label="Last"
+                onclick="{! c.onLast }"
+                disabled="{! v.currentPageNumber == v.totalPages }" />
+        </div>
+</aura:component>

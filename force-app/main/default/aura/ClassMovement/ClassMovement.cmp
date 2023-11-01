@@ -1,0 +1,54 @@
+<!--************************************************************************************
+ * Ver      Date           Author          Modification
+ * ===================================================================================
+   1.0      2022-09-12     tk.yoon         Create
+*************************************************************************************-->
+
+
+
+<aura:component description="ClassMovement" controller="ClassMovementController" implements="force:hasRecordId,force:lightningQuickActionWithoutHeader,flexipage:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="{!c.fnInit}" /> <!--c.function 은 controller에 있는 함수 사용할때-->
+    <aura:attribute name="recordId" type="String" default=""/> <!--component 에 있는 거 가져다 쓸 때 v.attribute-->
+    <aura:attribute name="classes" type="List" default=""/>
+    <aura:attribute name="selectedClass" type="String" default=""/>
+
+    <aura:html tag="style">
+        .slds-modal__container{
+        min-width: 702px !important;
+        max-width: fit-content !important;
+        padding: 0 20px;
+        }
+        .cuf-content {
+        padding: 0 0rem !important;
+        }
+        .slds-p-around--medium {
+        padding: 0rem !important;
+        }
+        .slds-modal__content {
+        overflow-y: hidden !important;
+        height: unset !important;
+        max-height: unset !important;
+        }
+        .slds-modal__close {
+        display: none !important;
+        }
+        .slds-form-element__label {
+        background-color: #FFFFFF;
+        }
+    </aura:html>
+
+    <div aura:id="modalContainer">
+        <section role="alertdialog" tabindex="-1" aria-labelledby="modal-heading-id" aria-describedby="modal-content-id" class="slds-modal slds-fade-in-open" aria-modal="true " >
+            <div class="slds-modal__container">
+                <header class="modal-header slds-modal__header">
+                    <div>반 이동</div>
+                </header>
+                <lightning:combobox name="classMove" class="slds-form-element__label" label="반 이동" value="{!v.selectedClass}" placeholder="반 선택.." options="{! v.classes}" onchange="{! c.chooseClass}"/>
+            <footer class="modal-footer slds-modal__footer">
+                <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick="{! c.clickCancel}">취소</button>
+                <button class="slds-button slds-button_brand" onclick="{! c.clickMove}">이동</button>
+            </footer>
+            </div>
+        </section>
+    </div>
+</aura:component>
